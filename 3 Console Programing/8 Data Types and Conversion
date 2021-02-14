@@ -1,0 +1,44 @@
+using System;
+
+namespace VariablesAndDataTypes
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string name;
+            int age;
+            double salary;
+            char gender;
+            bool working;
+
+
+            Console.Write("Enter you name: ");
+            name = Console.ReadLine();
+
+            Console.Write("Enter your age ");
+            age = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter your salary: ");
+            salary = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter your Gender: ");
+            gender = Convert.ToChar(Console.ReadLine());
+
+            Console.Write("Are you working ( true or false): ");
+            working = Convert.ToBoolean(Console.ReadLine());
+
+
+            // Pritn to Screen 
+
+            Console.WriteLine("YOur name is: " + name);
+            Console.WriteLine("Your Age is: {0}", age);
+            Console.WriteLine($"Your Salary Is: {salary}"); //interpolation
+            Console.WriteLine($"Your Gender Is: {gender}");
+            Console.WriteLine($"Working status: {working}");
+
+            Console.ReadKey();
+        }
+
+    }
+}
