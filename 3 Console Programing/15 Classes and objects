@@ -1,0 +1,81 @@
+using System;
+
+namespace ClassesAndObjects
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Box box = new Box();
+            Console.WriteLine("Enter Lenght");
+            double n1 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Breadth");
+            double n2 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Height");
+            double n3 = double.Parse(Console.ReadLine());
+
+
+            box.Lenght = n1;
+            box.Breadth = n2;
+            box.Height = n3;
+            double volume = box.GetVolume();
+
+            
+
+            Console.WriteLine($"Box Dimensions are: {box.Lenght}, {box.Breadth}, {box.Height}");
+            Console.WriteLine("Box volume is: {0} ", volume);
+
+            Person person = new Person();
+            person.Salary = 23;
+
+            person.Firstname = "klusia";
+            person.Lastname = "tłusta";
+
+            string sklejoneimie = person.Caleimie();
+
+            Console.WriteLine($"Person Salary is: {person.Salary}");
+            Console.WriteLine($"całe imie kluchy to: {sklejoneimie}");
+            Console.ReadKey();
+        }
+    }
+    
+    
+        class Box
+    {
+        public double Lenght { get; set; }
+        public double Breadth { get; set; }
+        public double Height { get; set; }
+
+        public double GetVolume()
+        {
+            return Lenght * Breadth * Height;
+        }
+
+    }
+
+        class Person
+    {
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public int Age { get; set; }
+
+        private double salary;
+
+
+        public double Salary
+        {
+            get { return salary; }
+            set { salary = value; }
+        }
+
+        public string Caleimie()
+        {
+            string caleimie = Firstname + " " + Lastname;
+
+            return caleimie;
+        }
+
+    }
+
+
+}
