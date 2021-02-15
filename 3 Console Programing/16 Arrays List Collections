@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+
+namespace ArrayAndCollections
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] grades = new int[5];
+
+            //int[] grades = new int[] { 1,5,7,34,23};
+
+            for (int i = 0; i < grades.Length; i++)
+            {
+                Console.WriteLine($"podaj liczbę {i+1} ");
+                grades[i] = int.Parse(Console.ReadLine());
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < grades.Length; i++)
+            {
+                Console.WriteLine(grades[i]); //grades.GetValue(i)
+            }
+
+            // ---------------- LISTA -----------------
+            //Declare variable size array
+            int[] grades1;
+
+            //Assign Values to Variable Array
+            grades1 = new int[] { 1, 6, 6, 34, 64, 43, 23, 65, 34, 23 };
+
+            //Print values in variable array
+            for (int i = 0; i < grades1.Length; i++)
+            {
+                Console.WriteLine(grades1[i]); //grades.GetValue(i)
+            }
+
+            //Declate a list
+            List<string> names = new List<string>();
+            string name = "";
+
+            //Add values to a list
+            names.Add("Klucha");
+
+            Console.WriteLine("Enter names: ");
+            while(!name.Equals("-1")) //jeżęli imie nie jest niczym
+            {
+                name = Console.ReadLine();
+                if(!name.Equals("-1"))
+                {
+                    names.Add(name);
+                }
+            }
+
+            Console.WriteLine("Studen names you entered are ( for loop)");
+            for (int i = 0; i < names.Count; i++)
+            {
+                Console.WriteLine(names[i]); 
+            }
+            Console.WriteLine("Studen names you entered are ( foreach loop)");
+            foreach (var item in names)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
