@@ -53,7 +53,7 @@ namespace ArrayAndCollections
                 }
             }
 
-            Console.WriteLine("Studen names you entered are ( for loop)");
+            Console.WriteLine("Studen names you entered are ( for loop)"); // zmiana
             for (int i = 0; i < names.Count; i++)
             {
                 Console.WriteLine(names[i]); 
