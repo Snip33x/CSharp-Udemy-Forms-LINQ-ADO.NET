@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _1CarRental
+{
+    public partial class Form1 : Form
+    {   // linijka niżej to private property
+        private readonly CarRentalEntities carRentalEntities;  // to całe pole z CarRentalDb.edmx - wszystko Entity =Jednostka, istota  
+
+        public Form1()
+        {
+            InitializeComponent();
+            carRentalEntities = new CarRentalEntities();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string customerName = tbCustomerName.Text;
+                var dateOut = dtRented.Value;
+                var dateIn = dtReturned.Value;
+                double cost = Convert.ToDouble(tbCost.Text); //albo parse
+
+                var carType = TypeofCarCombo.Text;
+                var isValid = true;
+                var errorMessage = "";
+
+                if (string.IsNullOrWhiteSpace(customerName) || string.IsNullOrWhiteSpace(carType))
+                {
+                    isValid = false;
+                    errorMessage += "Error: Please enter missing data.\n\r";
+                    //MessageBox.Show("Please enter missing data.");
+                }
+
+                if (dateOut > dateIn)
+                {
+                    isValid = false;
+                    errorMessage += "Error: Illegal date selection.\n\r";
+                    //MessageBox.Show("Illegal date selection");
+                }
+
+                //isValid == true;
+                if (isValid)
+                {
+                    // WKŁADAMY DANE DO BAZY DANYCH
+                    var rentalRecord = new CarRentalRecord();  //towrzymy obiekt aby móc wrzucić dane do DB
+                    rentalRecord.CustomreName = customerName;
+                    rentalRecord.DateRented = dateOut;
+                    rentalRecord.DateReturned = dateIn;
+                    rentalRecord.Cost = (decimal)cost;   //zmieniamy double na decimala
+                    rentalRecord.TypeOfCarID = (int)TypeofCarCombo.SelectedValue; //z combo fielda bierzemy Id tej marki samochodu  - rzutujemy że chcemy inta
+
+                    //commitujemy do DB
+                    carRentalEntities.CarRentalRecords.Add(rentalRecord);
+                    carRentalEntities.SaveChanges();
+
+                    // Message Box bo submicie
+                    MessageBox.Show($"Thank you for Renting {customerName}" +
+                       $"\nDate Rented: {dateOut}" +
+                       $"\nDate Returned: {dateIn}" +
+                       $"\nCost: {cost}" +
+                       $"\nType of Car: {carType}");
+                }
+                else
+                {
+                    MessageBox.Show(errorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                //throw;
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {   // Slecet * from TypesOfCars
+            var cars = carRentalEntities.TypesOfCars.ToList();
+            TypeofCarCombo.DisplayMember = "Name";  //Name to nazwa kolumny w db
+            TypeofCarCombo.ValueMember = "id";
+            TypeofCarCombo.DataSource = cars;
+        }
+    }
+}
