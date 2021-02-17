@@ -28,7 +28,7 @@ namespace ClassesAndObjects
             Person person = new Person();
             person.Salary = 23;
 
-            person.Firstname = "klusia";
+            person.Firstname = "klusia"; //ok
             person.Lastname = "tłusta";
 
             string sklejoneimie = person.Caleimie();
